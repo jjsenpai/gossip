@@ -1,15 +1,15 @@
-import type { Component } from "solid-js";
+import { Component } from "solid-js";
 
 const App: Component = () => {
   return (
-    <header className="h-screen bg-gradient-to-b from-gray-900 to-slate-800 flex flex-col text-white p-20">
-      <h1 className="text-5xl font-bold text-center mb-2">Gossip</h1>
-      <p className="text-center mb-6 text-xl">
+    <header class="h-screen bg-gradient-to-b from-gray-500 to-slate-800 flex flex-col text-white p-20">
+      <h1 class="text-5xl font-bold text-center mb-2">Gossip</h1>
+      <p class="text-center mb-6 text-xl">
         If you like this project, consider giving it a star on GitHub!
       </p>
-      <div className="flex flex-row justify-center items-center gap-4">
+      <div class="flex flex-row justify-center items-center gap-4">
         <a
-          className="github-button text-indigo-300 font-bold"
+          class="github-button text-indigo-300 font-bold"
           href="https://github.com/andrejjurkin/create-tw"
           data-color-scheme="no-preference: dark; light: dark; dark: dark;"
           data-icon="octicon-star"
@@ -20,7 +20,7 @@ const App: Component = () => {
           Star
         </a>
         <a
-          className="github-button text-indigo-300 font-bold"
+          class="github-button text-indigo-300 font-bold"
           href="https://github.com/andrejjurkin/create-tw/discussions"
           data-color-scheme="no-preference: dark; light: dark; dark: dark;"
           data-icon="octicon-comment-discussion"

@@ -11,7 +11,11 @@
   "license": "MIT",
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
     "autoprefixer": "^10.4.16",
+    "eslint": "^8.56.0",
+    "eslint-plugin-solid": "^0.13.1",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
     "solid-devtools": "^0.27.3",
@@ -22,5 +26,8 @@
   },
   "dependencies": {
     "solid-js": "^1.7.6"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/jjsenpai/gossip.git",
+  "author": "Ujjawal <ujjawal.sharma@preplaced.in>"
 }

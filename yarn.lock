@@ -687,6 +687,11 @@
   resolved "https://registry.npmjs.org/@solid-primitives/utils/-/utils-6.2.1.tgz"
   integrity sha512-TsecNzxiO5bLfzqb4OOuzfUmdOROcssuGqgh5rXMMaasoFZ3GoveUgdY1wcf17frMJM7kCNGNuK34EjErneZkg==
 
+"@solidjs/router@^0.10.5":
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/@solidjs/router/-/router-0.10.5.tgz#e459e2b4ae3acde6fbb3766f277b818af57c40ef"
+  integrity sha512-gxDeiyc97j8/UqzuuasZsQYA7jpmlwjkfpcay11Q2xfzoKR50eBM1AaxAPtf0MlBAdPsdPV3h/k8t5/XQCuebA==
+
 "@tailwindcss/forms@^0.5.7":
   version "0.5.7"
   resolved "https://registry.npmjs.org/@tailwindcss/forms/-/forms-0.5.7.tgz"

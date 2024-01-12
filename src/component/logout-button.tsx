@@ -1,23 +1,17 @@
 import { signOut } from "firebase/auth";
 import { auth as newauth } from "../firebase";
-
-type LogoutButtonProps = {
-  state: boolean;
-};
-
-const LogoutButton = ({ state }: LogoutButtonProps) => {
+import Signout from "../assets/logo/signout.svg";
+const LogoutButton = () => {
   return (
-    state && (
-      <button
-        onClick={async () => {
-          const res = await signOut(newauth);
-          window.location.reload();
-          console.log({ res });
-        }}
-      >
-        Signout
-      </button>
-    )
+    <button
+      onClick={async () => {
+        const res = await signOut(newauth);
+        window.location.reload();
+        console.log({ res });
+      }}
+    >
+      <img src={Signout} alt="Logo" className="h-7 w-7" />
+    </button>
   );
 };
 

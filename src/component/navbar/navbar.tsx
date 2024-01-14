@@ -21,9 +21,9 @@ export const Navbar = () => {
           key={index}
           src={Item.src}
           alt={`Icon ${index}`}
-          className="w-[70%]"
+          className="w-[30px]"
         />
-        <span className="text-white text-center text-sm">{Item.name}</span>
+        <span className="text-white text-center text-xs">{Item.name}</span>
       </button>
     ));
   }

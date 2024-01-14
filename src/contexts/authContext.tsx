@@ -5,7 +5,7 @@ import {
   createContext,
   ReactNode,
 } from "react";
-import { auth, provider } from "../firebase";
+import { auth, createCandidateDocument, provider } from "../firebase";
 import {
   OAuthCredential,
   User,
@@ -61,7 +61,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user) setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+        createCandidateDocument(user);
+      }
+
       setLoading(false);
     });
   }, []);

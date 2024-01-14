@@ -35,19 +35,6 @@ const GoogleButton = () => {
     google.accounts.id.prompt();
   }, []);
 
-  // useGoogleOneTapLogin({
-  //   onSuccess: (response: IGoogleEndPointResponse) => {
-  //     console.log(response);
-  //     if (auth.loginWithToken) {
-  //       auth.loginWithToken(response.sub);
-  //     }
-  //   },
-  //   onError: (response: string | Error | undefined) => console.log(response),
-  //   googleAccountConfigs: {
-  //     client_id:
-  //       "32536139861-r8ujabrn0a8ma2hjnd80it8da5qmsb5i.apps.googleusercontent.com",
-  //   },
-  // });
   return (
     // <button
     //   onClick={() => {

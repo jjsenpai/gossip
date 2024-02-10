@@ -1,5 +1,6 @@
 import SearchIcon from "../../../assets/main/search.svg";
-export const List = () => {
+import { ChatWthOtherUser } from "../../modal/chatButton";
+export const List = ({showModal}) => {
   return (
     <div className="h-full w-full border py-[30px] px-[30px] relative">
       <div className="relative">
@@ -14,6 +15,7 @@ export const List = () => {
           aria-hidden="true"
         />
       </div>
+      <ChatWthOtherUser showModal={showModal} />
     </div>
   );
 };

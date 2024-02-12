@@ -1,5 +1,6 @@
 import SearchIcon from "../../../assets/main/search.svg";
 import { NewChatButton } from "../../modal/chatButton";
+
 export const List = ({showModal}) => {
   return (
     <div className="h-full w-full border py-[30px] px-[30px] relative">

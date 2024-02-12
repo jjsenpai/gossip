@@ -12,11 +12,9 @@ export const Main = () => {
     <>
     <div className="bg-[#f9fafc] w-full mr-[10px] h-[98%] rounded-3xl overflow-clip flex">
       <div className="w-[35%] md:w-[350px]  h-full overflow-clip">
-        <List showModal={toggalModal} />
+          <List showModal={toggalModal} />
       </div>
-      <div className="w-full h-full border">
-         Chat
-      </div>
+      <div className="w-full h-full border">Chat</div>
     </div>
      {show && <Modal onClose={toggalModal}><User/></Modal>}
     </>

@@ -1,6 +1,6 @@
-export const ChatWthOtherUser = ({showModal}) => {
+export const NewChatButton = ({showModal}) => {
   return (
-      <button onClick={showModal} className=" bg-green-500 px-3 py-3 mt-10 mb-5 text-center rounded">
+      <button onClick={showModal} className=" bg-green-500 abo px-5 py-2 text-center rounded-md absolute right-2 bottom-1">
         chat
       </button>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchIcon from "../../../assets/main/search.svg";
 
+
 const ChatSkeleton: React.FC = () => {
   const renderChatMessages = () => {
     const messages = [];
@@ -14,6 +15,11 @@ const ChatSkeleton: React.FC = () => {
     }
     return messages;
   };
+
+
+import { NewChatButton } from "../../modal/chatButton";
+
+export const List = ({showModal}) => {
 
   return (
     <div className="h-full w-full border py-[30px] px-[30px] relative">
@@ -35,10 +41,14 @@ const ChatSkeleton: React.FC = () => {
         </label>
       </div>
 
+
       {/* Chat Messages */}
       <div className="p-4 space-y-4">
         {renderChatMessages()}
       </div>
+
+      <NewChatButton showModal={showModal} />
+
     </div>
   );
   

@@ -31,7 +31,7 @@ export const User = () => {
         <div>
             <h2 className="text-xl mb-4 mx-5">Chat</h2>
             <div className='flex flex-col items-start justify-start'>
-                <div className='my-4 mx-2 relative w-[40%]'>
+                <div className='my-4 mx-2 relative w-[75%]'>
                     <input
                         type="text"
                         value={email}
@@ -64,7 +64,10 @@ export const User = () => {
                     )
                 ) : (
                     <div className="text-gray-600 px-4 py-3 mb-5">
-                        searching...
+                        <div className="flex items-start space-x-4">
+                            <div className="bg-gray-300 h-12 w-20 rounded-full animate-pulse"></div>
+                            <div className="bg-gray-300 h-12 rounded animate-pulse w-[20%]"></div>
+                        </div>
                     </div>
                 )
                 }

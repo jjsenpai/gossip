@@ -1,27 +1,37 @@
-import { create } from 'zustand'
+import { create } from 'zustand';
 
-type roomDetails = {
-    users: []
-}
+export type messageType = {
+  sentBy: string;
+  timeStamp: Date;
+  message: string;
+  messageId: string;
+};
 
-type userType = {
-    userId: string,
-    displayName: string,
-    email: string,
-    createdOn: Date,
-    rooms: [],
-}
+export type roomDetailsType = {
+  roomId?:string;
+  users?: string[];
+  messages?: messageType[];
+};
+
+export type userType = {
+  userId?: string;
+  displayName?: string;
+  email?: string;
+  createdOn?: Date;
+  roomsJoined?: string[];
+  photo?: string;
+};
 
 type Store = {
-  count: number
-  userDetails: userType | object
-  roomDetails: roomDetails | object
-  inc: () => void
-}
+  userDetails: userType;
+  roomDetails: roomDetailsType[];
+  setUserDetails: (userDetails : userType) => void,
+  setRoomDetails: (roomDetailsPara : roomDetailsType[]) => void,
+};
 
-export const useStore = create<Store>()((set) => ({
-  count: 1,
+export const useStore = create<Store>((set) => ({
   userDetails: {},
-  roomDetails: {},
-  inc: () => set((state) => ({ count: state.count + 1 })),
-}))
+  roomDetails: [],
+  setUserDetails: (userDetails: userType) => set(() => ({ userDetails: userDetails })),
+  setRoomDetails: (roomDetailsPara: roomDetailsType[]) => set(() => ({ roomDetails: roomDetailsPara })),
+}));

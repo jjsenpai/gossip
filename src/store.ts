@@ -7,6 +7,12 @@ export type messageType = {
   messageId: string;
 };
 
+export type messageContent={
+  sentBy: string;
+  timeStamp: Date;
+  message: string;
+}
+
 export type roomDetailsType = {
   roomId?:string;
   users?: string[];

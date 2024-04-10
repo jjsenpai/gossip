@@ -34,7 +34,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function loginWithToken(token: OAuthCredential) {
         const data = await signInWithCredential(auth, token);
-        console.log(data);
         if (data.user) {
             navigate("/home", { replace: true });
         }
@@ -42,7 +41,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function login() {
         const data = await signInWithPopup(auth, provider);
-        console.log(data);
         if (data.user) {
             navigate("/home", { replace: true });
         }

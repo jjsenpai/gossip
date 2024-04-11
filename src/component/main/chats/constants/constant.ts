@@ -1,0 +1,1 @@
+export const dummyUserPhoto = 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=No+Profile+Icon';

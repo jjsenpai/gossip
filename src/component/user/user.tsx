@@ -3,6 +3,7 @@ import { db } from "../../firebase";
 import SearchIcon from '../../assets/main/search.svg';
 import { UserData } from "./interface/user";
 import { useState } from "react";
+import { dummyUserPhoto } from "../main/chats/constants/constant";
 
 export const User = () => {
     const [user, setUser] = useState<UserData | null>(null);
@@ -29,7 +30,7 @@ export const User = () => {
 
     return (
         <div>
-            <h2 className="text-xl mb-4 mx-5">Chat</h2>
+            <h2 className="text-xl mb-4 mx-5">Find Friends</h2>
             <div className='flex flex-col items-start justify-start'>
                 <div className='my-4 mx-2 relative w-[75%]'>
                     <input
@@ -51,11 +52,22 @@ export const User = () => {
                 {!loading ? (
                     searchQuery ? (
                         user ? (
-                            <div onClick={() => console.log(`user - ${user.userId}`)} className="text-gray-600 px-5 py-4 w-[36%] bg-blue-300 rounded-md mb-5">
-                                {user.displayName}
+                            <div onClick={() => console.log(`user - ${user.userId}`)} className="flex items-start space-x-4 cursor-pointer hover:bg-gray-100 p-2 rounded-md transition duration-300 ease-in-out">
+                                <div className="h-12 w-12 rounded-full overflow-hidden">
+                                    <img
+                                        src={user.photo || dummyUserPhoto}
+                                        alt="user"
+                                        onError={(e) => { (e.target as HTMLImageElement).src = dummyUserPhoto; }}
+                                        className="object-cover w-full h-full"
+                                    />
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <div className="text-gray-800 font-medium">{user.displayName}</div>
+                                    <div className="text-gray-500">{user.email}</div>
+                                </div>
                             </div>
                         ) : (
-                            <div className="text-gray-600 px-4 py-3 mb-5">user not found</div>
+                            <div className="text-gray-600 px-4 py-3 mb-5">oops! user not found</div>
                         )
                     ) : (
                         <div className="text-gray-600 px-4 py-3 mb-5">
@@ -65,8 +77,8 @@ export const User = () => {
                 ) : (
                     <div className="text-gray-600 px-4 py-3 mb-5">
                         <div className="flex items-start space-x-4">
-                            <div className="bg-gray-300 h-12 w-20 rounded-full animate-pulse"></div>
-                            <div className="bg-gray-300 h-12 rounded animate-pulse w-[20%]"></div>
+                            <div className="bg-gray-300 h-12 w-12 rounded-full animate-pulse"></div>
+                            <div className="bg-gray-300 h-12 rounded animate-pulse w-[60%]"></div>
                         </div>
                     </div>
                 )

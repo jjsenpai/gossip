@@ -34,11 +34,10 @@ export default function ChatsRuntime() {
         return
       }
       
-      // Get-or-Create should be in a Firebase Function
       axios.get(
         'https://api.chatengine.io/users/me/',
         { headers: { 
-          "project-id": '784bdb9e-8724-4f63-8ab6-3c10d59f74a7',
+          "project-id": '',
           "user-name": currentUser.email,
           "user-secret": currentUser.uid
         }}
@@ -87,7 +86,7 @@ export default function ChatsRuntime() {
 
       <ChatEngine 
         height='calc(100vh - 66px)'
-        projectID='784bdb9e-8724-4f63-8ab6-3c10d59f74a7'
+        projectID=''
         userName={currentUser.email}
         userSecret={currentUser.uid}
       />

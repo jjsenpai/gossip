@@ -61,20 +61,35 @@ export const createCandidateDocument = async (user) => {
     userDetails.roomsJoined.forEach(async roomId => {
       const document = doc(db, "rooms", roomId);
       const docSnapshot = await getDoc(document);
-      const msgSnapshot = await getDocs(collection(db,"rooms",roomId,"messageList"));
       const singleRoomDetail : roomDetailsType ={users:[], messages:[]};
-      const msgList = [];
-      msgSnapshot.forEach((msgItem)=>{
-        const singleMessage : messageType = {
-          sentBy: msgItem.data().sentBy,
-          timeStamp: msgItem.data().timeStamp,
-          message: msgItem.data().message,
-          messageId: msgItem.id
-        }
-        msgList.push(singleMessage);
-      })
+      const messageCollection = await getDocs(collection(db, 'rooms', roomId, 'messageList'));
+      const messages: messageType[] = [];
+
+      for (const messageDoc of messageCollection.docs) {
+          const messageData = messageDoc.data() as messageType;
+          const sentBy = messageData.sentBy;
+          const userQuery = query(collection(db, 'candidates'), where('userId', '==', sentBy));
+          const userSnapshot = await getDocs(userQuery);
+
+          if (!userSnapshot.empty) {
+              const displayName = userSnapshot.docs[0].data().displayName;
+              const messageWithDisplayName: messageType = {
+                  ...messageData,
+                  sentBy: displayName
+              };
+
+              messages.push(messageWithDisplayName);
+          } else {
+              const messageWithDisplayName: messageType = {
+                  ...messageData,
+                  sentBy: 'Unknown User'
+              };
+
+              messages.push(messageWithDisplayName);
+          }
+      }
       singleRoomDetail.users = docSnapshot.data().users;
-      singleRoomDetail.messages = msgList;
+      singleRoomDetail.messages = messages;
       singleRoomDetail.roomId = docSnapshot.id;
       roomDetailsPara.push(singleRoomDetail);
     });

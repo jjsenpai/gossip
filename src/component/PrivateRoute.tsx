@@ -1,22 +1,22 @@
-import { ReactNode, useEffect } from "react";
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../contexts/authContext";
+import { Navigate, useLocation } from "react-router-dom";
 
-export function ProtectedRoute({
-  redirectTo = "/signin",
-  children,
-}: {
-  redirectTo?: string;
-  children?: ReactNode;
-}) {
-  const auth = useAuth();
+import { FC } from "react";
+import { useStore } from "../store";
 
-  useEffect(() => {
-    console.log(auth.currentUser);
-  });
+const PrivateRoute: FC = ({ children }: { children: React.ReactNode }) => {
+    const currentUser = useStore((state) => state.currentUser);
+    const location = useLocation();
 
-  if (!auth.currentUser) {
-    return <Navigate to={redirectTo} />;
-  }
-  return children ? children : <Outlet />;
-}
+    if (!currentUser)
+        return (
+            <Navigate
+                to={`/sign-in?redirect=${encodeURIComponent(
+                    location.pathname + location.search
+                )}`}
+            />
+        );
+
+    return <>{children}</>;
+};
+
+export default PrivateRoute;

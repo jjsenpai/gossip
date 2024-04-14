@@ -19,7 +19,7 @@ type ResponseObject = {
 };
 const GoogleButton = () => {
     async function loginWithToken(token: OAuthCredential) {
-        const data = await signInWithCredential(auth, token);
+        await signInWithCredential(auth, token);
     }
 
     function handleCallBackResponse(response: ResponseObject) {
@@ -61,7 +61,6 @@ const GoogleButton = () => {
 };
 
 const Signin = () => {
-    const currentUser = useStore((state) => state.currentUser);
     const setCurrentUser = useStore((state) => state.setCurrentUser);
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {

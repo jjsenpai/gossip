@@ -37,13 +37,8 @@ interface AvatarFromIdProps {
 export const ChatHeader: FC<ChatHeaderProps> = ({ conversation }) => {
     const { data: users, loading } = useUsersInfo(conversation.users);
     const currentUser = useStore((state) => state.currentUser);
-
     const filtered = users?.filter((user) => user.id !== currentUser?.uid);
-
-    const [isConversationSettingsOpened, setIsConversationSettingsOpened] =
-        useState(false);
     const [isGroupMembersOpened, setIsGroupMembersOpened] = useState(false);
-    const [isViewMediaOpened, setIsViewMediaOpened] = useState(false);
 
     return (
         <>
@@ -283,7 +278,7 @@ export const ChatView: FC<ChatViewProps> = ({
                                                 key !== currentUser?.uid &&
                                                 value === item.id
                                         )
-                                        .map(([key, value]) => (
+                                        .map(([key]) => (
                                             <AvatarFromId
                                                 key={key}
                                                 uid={key}

@@ -112,25 +112,6 @@ const InputSection: FC<InputSectionProps> = ({
         updateTimestamp();
     };
 
-    const sendSticker = (url: string) => {
-        addDoc(
-            collection(
-                db,
-                "conversations",
-                conversationId as string,
-                "messages"
-            ),
-            {
-                sender: currentUser?.uid,
-                content: url,
-                type: "sticker",
-                createdAt: serverTimestamp(),
-            }
-        );
-
-        updateTimestamp();
-    };
-
     const uploadFile = async (file: File) => {
         try {
             const TWENTY_MB = 1024 * 1024 * 20;
@@ -186,14 +167,6 @@ const InputSection: FC<InputSectionProps> = ({
         uploadFile(file);
     };
 
-    const addIconToInput = (value: string) => {
-        const start = textInputRef.current?.selectionStart as number;
-        const end = textInputRef.current?.selectionEnd as number;
-        const splitted = inputValue.split("");
-        splitted.splice(start, end - start, value);
-        setInputValue(splitted.join(""));
-    };
-
     const handleReplaceEmoji = (e: any) => {
         if (e.key === " ") {
             if (e.target.selectionStart !== e.target.selectionEnd) return;
@@ -219,24 +192,6 @@ const InputSection: FC<InputSectionProps> = ({
                 });
             });
         }
-    };
-
-    const sendGif = (url: string) => {
-        addDoc(
-            collection(
-                db,
-                "conversations",
-                conversationId as string,
-                "messages"
-            ),
-            {
-                sender: currentUser?.uid,
-                content: url,
-                type: "image",
-                file: null,
-                createdAt: serverTimestamp(),
-            }
-        );
     };
 
     useEffect(() => {

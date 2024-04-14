@@ -195,11 +195,8 @@ export const SelectConversation: FC<SelectConversationProps> = ({
 
     const { id } = useParams();
 
-    const {
-        data: lastMessage,
-        loading: lastMessageLoading,
-        error: lastMessageError,
-    } = useLastMessage(conversationId);
+    const { data: lastMessage, loading: lastMessageLoading } =
+        useLastMessage(conversationId);
 
     if (loading)
         return (

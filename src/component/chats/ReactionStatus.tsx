@@ -32,17 +32,14 @@ const ReactionStatus: FC<ReactionStatusProps> = ({ message, position }) => {
                 }`}
             >
                 {Object.entries(
-                    Object.entries(message.reactions).reduce(
-                        (acc, [key, value]) => {
-                            if (value) acc[value] = (acc[value] || 0) + 1;
-                            return acc;
-                        },
-                        {} as { [key: number]: number }
-                    )
+                    Object.entries(message.reactions).reduce((acc, [value]) => {
+                        if (value) acc[value] = (acc[value] || 0) + 1;
+                        return acc;
+                    }, {} as { [key: number]: number })
                 )
-                    .sort(([key1, value1], [key2, value2]) => value1 - value2)
+                    .sort(([, value1], [, value2]) => value1 - value2)
                     .slice(0, 3)
-                    .map(([key, value]) => (
+                    .map(([key]) => (
                         <img
                             key={key}
                             className="h-3 w-3"
@@ -57,7 +54,7 @@ const ReactionStatus: FC<ReactionStatusProps> = ({ message, position }) => {
                 <span>
                     {
                         Object.entries(message.reactions).filter(
-                            ([key, value]) => value
+                            ([, value]) => value
                         ).length
                     }
                 </span>
@@ -98,7 +95,7 @@ const ReactionStatus: FC<ReactionStatusProps> = ({ message, position }) => {
                         ) : (
                             <div className="flex-grow overflow-y-auto overflow-x-hidden">
                                 {Object.entries(message.reactions)
-                                    .filter(([key, value]) => value)
+                                    .filter(([, value]) => value)
                                     .map(([key, value]) => (
                                         <div
                                             key={key}

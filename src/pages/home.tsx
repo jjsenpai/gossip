@@ -1,16 +1,17 @@
-import { Main } from "../component/main/main";
-import { Navbar } from "../component/navbar/navbar";
+import { FC } from "react";
 
-export const Home = () => {
-  
-  return (
-    <div className="h-[100vh] w-[100vw] bg-[#202022] flex">
-      <div className="w-[70px] max-w-[70px] h-full">
-        <Navbar />
-      </div>
-      <div className="w-full h-full flex items-center ">
-        <Main />
-      </div>
-    </div>
-  );
+const Home: FC = () => {
+    return (
+        <div className="flex">
+            <SideBar />
+
+            <div className="hidden flex-grow flex-col items-center justify-center gap-3 md:!flex">
+                <h1 className="text-center">
+                    Select a conversation to start chatting
+                </h1>
+            </div>
+        </div>
+    );
 };
+
+export default Home;

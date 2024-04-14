@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import { useStore } from "../store";
 import ChatHeader from "../component/main/chats/ChatHeader";
 import ChatView from "../component/main/chats/ChatView";
+import { useDocumentQuery } from "../component/hooks/allHooks";
+import { db } from "../firebase";
 
 const Chat: FC = () => {
     const { id } = useParams();

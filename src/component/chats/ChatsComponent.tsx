@@ -1,23 +1,35 @@
-import { DEFAULT_AVATAR, Alert, THEMES, formatFileName, MessageItem, LeftMessage, RightMessage, ConversationInfo, AvatarFromId } from "./utils";
-import { ChangeEvent, FC, FormEvent, useRef, useState, useEffect, Fragment } from "react";
-import { query, collection, arrayRemove, doc, updateDoc, limitToLast, orderBy } from "firebase/firestore";
-import { db, storage } from "../../../firebase";
+import {
+    ChangeEvent,
+    FC,
+    FormEvent,
+    useRef,
+    useState,
+    useEffect,
+    Fragment,
+} from "react";
+import {
+    query,
+    collection,
+    arrayRemove,
+    doc,
+    updateDoc,
+    limitToLast,
+    orderBy,
+} from "firebase/firestore";
+import { db, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { useStore } from "../../../store";
-import { useCollectionQuery, useUsersInfo } from "../../hooks/allHooks";
-import { Skeleton } from "../list/chatskeleton";
-import {ViewMedia} from "./Media";
+import { useStore } from "../../store";
+import { useCollectionQuery, useUsersInfo } from "../hooks/allHooks";
+import { Skeleton } from "../main/list/chatskeleton";
+import { ViewMedia } from "./Media";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spin from "react-cssfx-loading/src/Spin";
-import ViewGroup from "../Group/ViewGroup";
-
-
+import { formatFileName } from "../utils";
 
 interface ChatHeaderProps {
     conversation: ConversationInfo;
 }
-
 
 interface ChatViewProps {
     conversation: ConversationInfo;
@@ -40,7 +52,6 @@ interface AvatarFromIdProps {
 interface ReplyBadgeProps {
     messageId: string;
 }
-
 
 export const ChatHeader: FC<ChatHeaderProps> = ({ conversation }) => {
     const { data: users, loading } = useUsersInfo(conversation.users);
@@ -67,7 +78,9 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ conversation }) => {
                             {conversation.users.length === 2 ? (
                                 <img
                                     className="h-10 w-10 rounded-full"
-                                    src={IMAGE_PROXY(filtered?.[0]?.data()?.photoURL)}
+                                    src={IMAGE_PROXY(
+                                        filtered?.[0]?.data()?.photoURL
+                                    )}
                                     alt=""
                                 />
                             ) : (
@@ -82,12 +95,18 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ conversation }) => {
                                         <div className="relative h-10 w-10 flex-shrink-0">
                                             <img
                                                 className="absolute top-0 right-0 h-7 w-7 flex-shrink-0 rounded-full object-cover"
-                                                src={IMAGE_PROXY(filtered?.[0]?.data()?.photoURL)}
+                                                src={IMAGE_PROXY(
+                                                    filtered?.[0]?.data()
+                                                        ?.photoURL
+                                                )}
                                                 alt=""
                                             />
                                             <img
                                                 className={`border-dark absolute bottom-0 left-0 z-[1] h-7 w-7 flex-shrink-0 rounded-full border-2 object-cover transition duration-300`}
-                                                src={IMAGE_PROXY(filtered?.[1]?.data()?.photoURL)}
+                                                src={IMAGE_PROXY(
+                                                    filtered?.[1]?.data()
+                                                        ?.photoURL
+                                                )}
                                                 alt=""
                                             />
                                         </div>
@@ -101,12 +120,13 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ conversation }) => {
                         <Skeleton className="h-6 w-1/4" />
                     ) : (
                         <p>
-                            {conversation.users.length > 2 && conversation?.group?.groupName
+                            {conversation.users.length > 2 &&
+                            conversation?.group?.groupName
                                 ? conversation.group.groupName
                                 : filtered
-                                    ?.map((user) => user.data()?.displayName)
-                                    .slice(0, 3)
-                                    .join(", ")}
+                                      ?.map((user) => user.data()?.displayName)
+                                      .slice(0, 3)
+                                      .join(", ")}
                         </p>
                     )}
                 </div>
@@ -114,12 +134,18 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ conversation }) => {
                 {!loading && (
                     <>
                         {conversation.users.length > 2 && (
-                            <button onClick={() => setIsGroupMembersOpened(true)}>
+                            <button
+                                onClick={() => setIsGroupMembersOpened(true)}
+                            >
                                 <i className="bx bxs-group text-primary text-2xl"></i>
                             </button>
                         )}
 
-                        <button onClick={() => setIsConversationSettingsOpened(true)}>
+                        <button
+                            onClick={() =>
+                                setIsConversationSettingsOpened(true)
+                            }
+                        >
                             <i className="bx bxs-info-circle text-primary text-2xl"></i>
                         </button>
                     </>
@@ -140,7 +166,9 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ conversation }) => {
                     conversation={conversation}
                 />
             )}
-            {isViewMediaOpened && <ViewMedia setIsOpened={setIsViewMediaOpened} />}
+            {isViewMediaOpened && (
+                <ViewMedia setIsOpened={setIsViewMediaOpened} />
+            )}
         </>
     );
 };
@@ -162,7 +190,12 @@ export const ChatView: FC<ChatViewProps> = ({
     const { data, loading, error } = useCollectionQuery(
         `conversation-data-${conversationId}-${limitCount}`,
         query(
-            collection(db, "conversations", conversationId as string, "messages"),
+            collection(
+                db,
+                "conversations",
+                conversationId as string,
+                "messages"
+            ),
             orderBy("createdAt"),
             limitToLast(limitCount)
         )
@@ -197,9 +230,12 @@ export const ChatView: FC<ChatViewProps> = ({
 
         if (!lastDoc) return;
 
-        updateDoc(doc(db, "conversations", conversationIdRef.current as string), {
-            [`seen.${currentUser?.uid}`]: lastDoc.id,
-        });
+        updateDoc(
+            doc(db, "conversations", conversationIdRef.current as string),
+            {
+                [`seen.${currentUser?.uid}`]: lastDoc.id,
+            }
+        );
     };
 
     useEffect(() => {
@@ -232,7 +268,9 @@ export const ChatView: FC<ChatViewProps> = ({
     if (error)
         return (
             <div className="flex-grow">
-                <p className="mt-4 text-center text-gray-400">Something went wrong</p>
+                <p className="mt-4 text-center text-gray-400">
+                    Something went wrong
+                </p>
             </div>
         );
 
@@ -261,7 +299,9 @@ export const ChatView: FC<ChatViewProps> = ({
         >
             <div className="flex flex-col items-stretch gap-3 pt-10 pb-1">
                 {data?.docs
-                    .map((doc) => ({ id: doc.id, ...doc.data() } as MessageItem))
+                    .map(
+                        (doc) => ({ id: doc.id, ...doc.data() } as MessageItem)
+                    )
                     .map((item, index) => (
                         <Fragment key={item.id}>
                             {item.sender === currentUser?.uid ? (
@@ -281,19 +321,26 @@ export const ChatView: FC<ChatViewProps> = ({
                                 />
                             )}
                             {Object.entries(conversation.seen).filter(
-                                ([key, value]) => key !== currentUser?.uid && value === item.id
+                                ([key, value]) =>
+                                    key !== currentUser?.uid &&
+                                    value === item.id
                             ).length > 0 && (
-                                    <div className="flex justify-end gap-[1px] px-8">
-                                        {Object.entries(conversation.seen)
-                                            .filter(
-                                                ([key, value]) =>
-                                                    key !== currentUser?.uid && value === item.id
-                                            )
-                                            .map(([key, value]) => (
-                                                <AvatarFromId key={key} uid={key} size={14} />
-                                            ))}
-                                    </div>
-                                )}
+                                <div className="flex justify-end gap-[1px] px-8">
+                                    {Object.entries(conversation.seen)
+                                        .filter(
+                                            ([key, value]) =>
+                                                key !== currentUser?.uid &&
+                                                value === item.id
+                                        )
+                                        .map(([key, value]) => (
+                                            <AvatarFromId
+                                                key={key}
+                                                uid={key}
+                                                size={14}
+                                            />
+                                        ))}
+                                </div>
+                            )}
                         </Fragment>
                     ))}
                 <div ref={scrollBottomRef}></div>
@@ -412,7 +459,9 @@ export const ConversationSettings: FC<ConversationConfigProps> = ({
                     {conversation.users.length > 2 && (
                         <>
                             <button
-                                onClick={() => setIsChangeChatNameOpened((prev) => !prev)}
+                                onClick={() =>
+                                    setIsChangeChatNameOpened((prev) => !prev)
+                                }
                                 className="bg-dark flex items-center justify-between gap-3 rounded-lg px-3 py-2 transition duration-300 hover:brightness-125"
                             >
                                 <div className="flex items-center gap-3">
@@ -421,16 +470,26 @@ export const ConversationSettings: FC<ConversationConfigProps> = ({
                                 </div>
 
                                 <i
-                                    className={`bx bx-chevron-down text-3xl ${isChangeChatNameOpened ? "rotate-180" : ""
-                                        }`}
+                                    className={`bx bx-chevron-down text-3xl ${
+                                        isChangeChatNameOpened
+                                            ? "rotate-180"
+                                            : ""
+                                    }`}
                                 ></i>
                             </button>
                             {isChangeChatNameOpened && (
-                                <form onSubmit={handleFormSubmit} className="my-2 flex gap-3">
+                                <form
+                                    onSubmit={handleFormSubmit}
+                                    className="my-2 flex gap-3"
+                                >
                                     <div className="flex-grow">
                                         <input
                                             value={chatNameInputValue}
-                                            onChange={(e) => setChatNameInputValue(e.target.value)}
+                                            onChange={(e) =>
+                                                setChatNameInputValue(
+                                                    e.target.value
+                                                )
+                                            }
                                             className="border-dark-lighten bg-dark h-full w-full rounded-lg border p-2 outline-none transition duration-300 focus:border-gray-500"
                                             type="text"
                                             placeholder="Chat name"
@@ -476,8 +535,9 @@ export const ConversationSettings: FC<ConversationConfigProps> = ({
                         </div>
 
                         <i
-                            className={`bx bx-chevron-down text-3xl ${isChangeThemeOpened ? "rotate-180" : ""
-                                }`}
+                            className={`bx bx-chevron-down text-3xl ${
+                                isChangeThemeOpened ? "rotate-180" : ""
+                            }`}
                         ></i>
                     </button>
 
@@ -488,8 +548,11 @@ export const ConversationSettings: FC<ConversationConfigProps> = ({
                                     key={theme}
                                     style={{ background: theme }}
                                     onClick={() => changeTheme(theme)}
-                                    className={`h-14 w-14 cursor-pointer rounded-full ${conversation.theme === theme ? "check-overlay" : ""
-                                        }`}
+                                    className={`h-14 w-14 cursor-pointer rounded-full ${
+                                        conversation.theme === theme
+                                            ? "check-overlay"
+                                            : ""
+                                    }`}
                                 ></div>
                             ))}
                         </div>
@@ -559,7 +622,13 @@ export const ReplyBadge: FC<ReplyBadgeProps> = ({ messageId }) => {
 
     const { data, loading, error } = useDocumentQuery(
         `message-${messageId}`,
-        doc(db, "conversations", conversationId as string, "messages", messageId)
+        doc(
+            db,
+            "conversations",
+            conversationId as string,
+            "messages",
+            messageId
+        )
     );
 
     if (loading || error)

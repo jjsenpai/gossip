@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { SideBar } from "../component/home/HomeComponents";
 
 const Home: FC = () => {
     return (

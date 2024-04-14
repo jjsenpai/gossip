@@ -2,10 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { doc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { useStore } from "../store";
-import ChatHeader from "../component/main/chats/ChatHeader";
-import ChatView from "../component/main/chats/ChatView";
 import { useDocumentQuery } from "../component/hooks/allHooks";
 import { db } from "../firebase";
+import { ChatHeader, ChatView } from "../component/chats/ChatsComponent";
 
 const Chat: FC = () => {
     const { id } = useParams();

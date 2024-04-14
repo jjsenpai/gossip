@@ -6,7 +6,7 @@ import {
     onAuthStateChanged,
     signInWithCredential,
 } from "firebase/auth";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useStore } from "../store";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
@@ -18,7 +18,6 @@ type ResponseObject = {
     credential: string;
 };
 const GoogleButton = () => {
-    const navigate = useNavigate();
     async function loginWithToken(token: OAuthCredential) {
         const data = await signInWithCredential(auth, token);
     }

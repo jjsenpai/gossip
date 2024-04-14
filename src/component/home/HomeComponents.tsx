@@ -20,7 +20,7 @@ import { Spin } from "react-cssfx-loading";
 import Skeleton from "../Skeleton";
 import { signOut } from "firebase/auth";
 import { ConversationInfo } from "../../types";
-import { DEFAULT_AVATAR, IMAGE_PROXY, THEMES } from "../../constants";
+import { DEFAULT_AVATAR, THEMES } from "../../constants";
 import ClickAwayListener from "../ClickAwayListener";
 
 interface CreateConversationProps {
@@ -156,9 +156,7 @@ export const CreateConversation: FC<CreateConversationProps> = ({
                                         />
                                         <img
                                             className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
-                                            src={IMAGE_PROXY(
-                                                doc.data().photoURL
-                                            )}
+                                            src={doc.data().photoURL}
                                             alt=""
                                         />
                                         <p>{doc.data().displayName}</p>
@@ -224,7 +222,7 @@ export const SelectConversation: FC<SelectConversationProps> = ({
             >
                 <img
                     className="h-14 w-14 flex-shrink-0 rounded-full object-cover"
-                    src={IMAGE_PROXY(filtered?.[0]?.data()?.photoURL)}
+                    src={filtered?.[0]?.data()?.photoURL}
                     alt=""
                 />
                 <div className="flex flex-grow flex-col items-start gap-1 py-1">
@@ -270,14 +268,14 @@ export const SelectConversation: FC<SelectConversationProps> = ({
                 <div className="relative h-14 w-14">
                     <img
                         className="absolute top-0 right-0 h-10 w-10 flex-shrink-0 rounded-full object-cover"
-                        src={IMAGE_PROXY(filtered?.[0]?.data()?.photoURL)}
+                        src={filtered?.[0]?.data()?.photoURL}
                         alt=""
                     />
                     <img
                         className={`border-dark group-hover:border-dark-lighten absolute bottom-0 left-0 z-[1] h-10 w-10 flex-shrink-0 rounded-full border-[3px] object-cover transition duration-300 ${
                             conversationId === id ? "!border-[#252F3C]" : ""
                         }`}
-                        src={IMAGE_PROXY(filtered?.[1]?.data()?.photoURL)}
+                        src={filtered?.[1]?.data()?.photoURL}
                         alt=""
                     />
                 </div>
@@ -341,8 +339,8 @@ export const SideBar: FC = () => {
             >
                 <div className="border-dark-lighten flex h-20 items-center justify-between border-b px-6">
                     <Link to="/" className="flex items-center gap-1">
-                        <img className="h-8 w-8" src="/icon.svg" alt="" />
-                        <h1 className="text-xl">FireVerse</h1>
+                        <img className="h-8 w-8" src="/gossip.svg" alt="" />
+                        <h1 className="text-xl">ossip</h1>
                     </Link>
 
                     <div className="flex items-center gap-1">
@@ -365,9 +363,7 @@ export const SideBar: FC = () => {
                                         className="h-8 w-8 cursor-pointer rounded-full object-cover"
                                         src={
                                             currentUser?.photoURL
-                                                ? IMAGE_PROXY(
-                                                      currentUser.photoURL
-                                                  )
+                                                ? currentUser.photoURL
                                                 : DEFAULT_AVATAR
                                         }
                                         alt=""
@@ -490,7 +486,7 @@ export const UserInfo: FC<UserInfoProps> = ({ isOpened, setIsOpened }) => {
                     <div className="flex gap-4">
                         <img
                             className="h-16 w-16 rounded-full object-cover"
-                            src={IMAGE_PROXY(currentUser?.photoURL as string)}
+                            src={currentUser?.photoURL as string}
                             alt=""
                         />
                         <div>

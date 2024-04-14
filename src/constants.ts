@@ -1,9 +1,4 @@
 export const DEFAULT_AVATAR = "/default-avatar.png";
-export const IMAGE_PROXY = (url: string) =>
-  `https://apoqrsgtqq.cloudimg.io/${url}`;
-
-export const STICKERS_URL =
-  "https://cdn.jsdelivr.net/gh/naptestdev/zalo-stickers/data/favourite.json";
 
 export const FILE_ICON = (extension: string) =>
   `https://cdn.jsdelivr.net/gh/napthedev/file-icons/file/${extension}.svg`;

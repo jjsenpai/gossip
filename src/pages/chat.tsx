@@ -5,6 +5,9 @@ import { useStore } from "../store";
 import { useDocumentQuery } from "../component/hooks/allHooks";
 import { db } from "../firebase";
 import { ChatHeader, ChatView } from "../component/chats/ChatsComponent";
+import InputSection from "../component/Input/InputSection";
+import { SideBar } from "../component/home/HomeComponents";
+import { ConversationInfo } from "../types";
 
 const Chat: FC = () => {
     const { id } = useParams();
@@ -19,8 +22,6 @@ const Chat: FC = () => {
     const currentUser = useStore((state) => state.currentUser);
 
     const [inputSectionOffset, setInputSectionOffset] = useState(0);
-
-    const [replyInfo, setReplyInfo] = useState(null);
 
     useEffect(() => {
         if (conversation?.theme)
@@ -58,15 +59,11 @@ const Chat: FC = () => {
                     <>
                         <ChatHeader conversation={conversation} />
                         <ChatView
-                            replyInfo={replyInfo}
-                            setReplyInfo={setReplyInfo}
                             inputSectionOffset={inputSectionOffset}
                             conversation={conversation}
                         />
                         <InputSection
                             setInputSectionOffset={setInputSectionOffset}
-                            replyInfo={replyInfo}
-                            setReplyInfo={setReplyInfo}
                             disabled={false}
                         />
                     </>

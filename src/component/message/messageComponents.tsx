@@ -1,18 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC, Fragment, useState } from "react";
 import { ConversationInfo, MessageItem } from "../../types";
-import { useStore } from "../../store";
 import { formatDate, formatFileSize, splitLinkFromMessage } from "../utils";
 import { AvatarFromId } from "../chats/ChatsComponent";
 import { EMOJI_REGEX } from "../../constants";
 import SpriteRenderer from "../SpriteRenderer";
 import ImageView from "../ImageView";
-import ClickAwayListener from "../ClickAwayListener";
 import { useParams } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import FileIcon from "../FileIcon";
-import ReactionPopup from "../chats/ReactionPopup";
-import ReactionStatus from "../chats/ReactionStatus";
 import { db } from "../../firebase";
 
 interface LeftMessageProps {
@@ -28,11 +24,7 @@ export const LeftMessage: FC<LeftMessageProps> = ({
     index,
     docs,
 }) => {
-    const [isSelectReactionOpened, setIsSelectReactionOpened] = useState(false);
-    const currentUser = useStore((state) => state.currentUser);
-
     const [isImageViewOpened, setIsImageViewOpened] = useState(false);
-
     const formattedDate = formatDate(
         message.createdAt.seconds
             ? message.createdAt.seconds * 1000
@@ -157,40 +149,6 @@ export const LeftMessage: FC<LeftMessageProps> = ({
                         Message has been removed
                     </div>
                 )}
-
-                {message.type !== "removed" && (
-                    <>
-                        {isSelectReactionOpened && (
-                            <ClickAwayListener
-                                onClickAway={() =>
-                                    setIsSelectReactionOpened(false)
-                                }
-                            >
-                                {(ref) => (
-                                    <ReactionPopup
-                                        position={"left"}
-                                        forwardedRef={ref}
-                                        setIsOpened={setIsSelectReactionOpened}
-                                        messageId={message.id as string}
-                                        currentReaction={
-                                            message.reactions?.[
-                                                currentUser?.uid as string
-                                            ] || 0
-                                        }
-                                    />
-                                )}
-                            </ClickAwayListener>
-                        )}
-                    </>
-                )}
-                {Object.keys(message.reactions || {}).length > 0 && (
-                    <ReactionStatus
-                        message={message}
-                        position={
-                            conversation.users.length > 2 ? "left-tab" : "left"
-                        }
-                    />
-                )}
             </div>
         </div>
     );
@@ -201,12 +159,7 @@ interface RightMessageProps {
 }
 
 export const RightMessage: FC<RightMessageProps> = ({ message }) => {
-    const [isSelectReactionOpened, setIsSelectReactionOpened] = useState(false);
-
     const { id: conversationId } = useParams();
-
-    const currentUser = useStore((state) => state.currentUser);
-
     const [isImageViewOpened, setIsImageViewOpened] = useState(false);
 
     const removeMessage = (messageId: string) => {
@@ -354,35 +307,6 @@ export const RightMessage: FC<RightMessageProps> = ({ message }) => {
                         >
                             <i className="bx bxs-trash"></i>
                         </button>
-
-                        {isSelectReactionOpened && (
-                            <ClickAwayListener
-                                onClickAway={() =>
-                                    setIsSelectReactionOpened(false)
-                                }
-                            >
-                                {(ref) => (
-                                    <ReactionPopup
-                                        position="right"
-                                        forwardedRef={ref}
-                                        setIsOpened={setIsSelectReactionOpened}
-                                        messageId={message.id as string}
-                                        currentReaction={
-                                            message.reactions?.[
-                                                currentUser?.uid as string
-                                            ] || 0
-                                        }
-                                    />
-                                )}
-                            </ClickAwayListener>
-                        )}
-
-                        {Object.keys(message.reactions || {}).length > 0 && (
-                            <ReactionStatus
-                                message={message}
-                                position="right"
-                            />
-                        )}
                     </>
                 )}
             </div>

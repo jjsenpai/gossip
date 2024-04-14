@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider} from "firebase/auth";
 import { addDoc, collection, getFirestore, query, Timestamp, where, doc, getDoc, getDocs } from "firebase/firestore";
 import { messageType, roomDetailsType, userType, useStore } from './store'
+import { io } from "socket.io-client";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APP_API_KEY,
@@ -18,6 +19,8 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 export const db = getFirestore(app);
 export {auth, provider};
+
+export const socket = io(" http://localhost:3000");
 
 export const createCandidateDocument = async (user) => {
   console.log(user);

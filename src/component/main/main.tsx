@@ -8,6 +8,7 @@ import { messageType, useStore } from "../../store";
 
 export const Main = () => {
   const [index,setIndex]=useState<number>(0);
+  const [roomId,setRoomId]=useState<string>('');
   const [messages,setMessages] = useState<messageType[]>([]);
   const [show,setShow] =useState(false);
   
@@ -21,6 +22,7 @@ export const Main = () => {
      if(useStore.getState().roomDetails.length > index){
          const firstRoom = useStore.getState().roomDetails[index];
          setMessages(firstRoom.messages || []);
+         setRoomId(firstRoom.roomId || '');
      }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index,  useStore.getState().roomDetails]);
@@ -31,7 +33,7 @@ export const Main = () => {
       <div className="w-[35%] md:w-[350px]  h-full overflow-clip">
           <List showModal={toggalModal} />
       </div>
-      <div className="w-full h-full border"><Chats messages={messages}/></div>
+      <div className="w-full h-full border"><Chats messages={messages} roomId={roomId}/></div>
     </div>
      {show && <Modal onClose={toggalModal}><User/></Modal>}
     </>

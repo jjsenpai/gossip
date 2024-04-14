@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-
 import { doc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { useStore } from "../store";

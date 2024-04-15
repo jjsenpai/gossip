@@ -1,30 +1,72 @@
-# React + TypeScript + Vite
+**Gossip: Real-time Chat Application**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+**Description:**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Gossip is a real-time chat application built using React, Tailwind CSS, and Firebase. It provides users with features like personal chat, group chat, real-time messaging, live notifications, message delete, and seen message tracking.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**Features:**
 
-- Configure the top-level `parserOptions` property like this:
+- **Personal Chat:** Users can have one-on-one conversations with others securely.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **Group Chat:** Users can create or join group conversations with multiple participants.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **Real-time Messaging:** Messages are delivered instantly, providing a seamless chatting experience.
+
+- **Live Notification:** Users receive notifications in real-time for new messages, mentions, or group updates.
+
+- **Message Delete Feature:** Users can delete messages they've sent within the application.
+
+- **Seen Message Feature:** Gossip tracks when messages have been seen by recipients, adding transparency to conversations.
+
+---
+
+**Technologies Used:**
+
+- **React:** A JavaScript library for building user interfaces, facilitating the creation of dynamic and interactive UI components.
+
+- **Tailwind CSS:** A utility-first CSS framework that allows for rapid UI development by applying pre-defined classes directly in HTML.
+
+- **Firebase:** A platform for building web and mobile applications without managing servers. Firebase offers features like real-time database, authentication, and hosting, which are utilized for Gossip's backend functionalities.
+
+---
+
+**Installation:**
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/jjsenpai/gossip.git
+   ```
+
+2. Navigate to the project directory:
+   ```
+   cd gossip
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+4. Start the development server:
+   ```
+   npm run dev
+   ```
+
+5. Open your browser and navigate to `http://localhost:3000` to view the application.
+
+---
+
+**Contributing:**
+
+Contributions to Gossip are welcome! If you'd like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Create a new Pull Request.
+

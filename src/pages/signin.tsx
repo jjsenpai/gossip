@@ -11,6 +11,7 @@ import { useStore } from "../store";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { useQueryParams } from "../component/hooks/allHooks";
+import Gossip from "../assets/logo/Gossip.svg";
 
 type ResponseObject = {
     clientId: string;
@@ -80,8 +81,12 @@ const Signin = () => {
 
     return (
         <div className="flex h-[100vh] w-[100vw]">
-            <div className="relative flex w-[45%] flex-col items-center justify-center bg-black text-center text-white">
-                <p>Signin</p>
+            <div className="flex w-[45%] gap-5 flex-col items-center justify-center bg-black text-center text-white">
+                <img src={Gossip} alt="Gossip" className="h-[200px]" />
+                <p className="text-center w-[40%]">
+                    Gossip is a real-time chat application built using React,
+                    Tailwind CSS, and Firebase
+                </p>
                 <GoogleButton />
             </div>
             <div className="relative aspect-auto w-[55%]">

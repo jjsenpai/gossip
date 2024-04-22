@@ -4,7 +4,6 @@ import { ConversationInfo, MessageItem } from "../../types";
 import { formatDate, formatFileSize, splitLinkFromMessage } from "../utils";
 import { AvatarFromId } from "../chats/ChatsComponent";
 import { EMOJI_REGEX } from "../../constants";
-import SpriteRenderer from "../SpriteRenderer";
 import ImageView from "../ImageView";
 import { useParams } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
@@ -279,13 +278,6 @@ export const RightMessage: FC<RightMessageProps> = ({ message }) => {
                             <i className="bx bxs-download text-2xl"></i>
                         </a>
                     </div>
-                ) : message.type === "sticker" ? (
-                    <SpriteRenderer
-                        onClick={(e) => e.stopPropagation()}
-                        title={formattedDate}
-                        src={message.content}
-                        size={130}
-                    />
                 ) : (
                     <div
                         onClick={(e) => e.stopPropagation()}

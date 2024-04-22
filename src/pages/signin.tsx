@@ -34,7 +34,7 @@ const GoogleButton = () => {
         const google = window["google"];
         google.accounts.id.initialize({
             client_id:
-                "32536139861-r8ujabrn0a8ma2hjnd80it8da5qmsb5i.apps.googleusercontent.com",
+                "462896730623-iluoff5jna8t5ep6h3aa14qj1a94v5p1.apps.googleusercontent.com",
             callback: handleCallBackResponse,
             cancel_on_tap_outside: false,
         });
